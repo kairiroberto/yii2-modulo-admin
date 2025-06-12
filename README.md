@@ -21,6 +21,9 @@ composer config repositories.yii2-modulo-admin vcs https://github.com/kairirober
 composer require roberto/yii2-modulo-admin:dev-main
 ```
 
+### Instalação via app\modules
+Baixa 'controllers/ModuloController.php', 'views/modulo/add.php', 'views/modulo/index.php', 'views/modulo/view.php' e Module.php, corrigir os namespace das classes ModuloController e do Module, finalmente, configurar o modulo no config/web.
+
 ### Ativação no Yii2
 
 No arquivo `config/web.php`, registre o módulo:
