@@ -49,7 +49,7 @@ No arquivo `config/web.php`, registre o módulo e os array dos módulos que vão
 
 ```bash
 $config['modules']['moduloadmin'] = [
-    'class' => 'app\\modules\\moduloadmin\\Module',
+    'class' => 'roberto\\moduloadmin\\Module',
 ];
 
 $config['modules'] = array_merge(
