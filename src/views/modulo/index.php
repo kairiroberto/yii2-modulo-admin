@@ -1,11 +1,39 @@
+<?php
+
+use yii\grid\GridView;
+use yii\data\ArrayDataProvider;
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+// Transforma o array de módulos em provider
+$dataProvider = new ArrayDataProvider([
+    'allModels' => array_map(function ($nome, $config) {
+        return [
+            'nome' => $nome,
+            'classe' => $config['class'],
+        ];
+    }, array_keys($modulos), $modulos),
+    'pagination' => false,
+]);
+?>
+
 <h1>📦 Módulos Registrados</h1>
-<table border="1" cellpadding="5">
-<tr><th>Nome</th><th>Classe</th></tr>
-<?php foreach ($modulos as $nome => $config): ?>
-<tr>
-    <td><?= $nome ?> [<a href="<?= \yii\helpers\Url::to(['modulo/view', 'id' => $nome]) ?>">🔍 Ver Estrutura</a>]</td>
-    <td><?= $config['class'] ?></td>
-</tr>
-<?php endforeach; ?>
-</table>
-<a href="add">➕ Adicionar Novo Módulo</a>
+
+<?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'columns' => [
+        [
+            'attribute' => 'nome',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return Html::a("🔍 Ver Estrutura", ['modulo/view', 'id' => $model['nome']]) . " <strong>" . Html::encode($model['nome']) . "</strong>";
+            }
+        ],
+        [
+            'attribute' => 'classe',
+            'format' => 'text',
+        ],
+    ],
+]); ?>
+
+<p><?= Html::a('➕ Adicionar Novo Módulo', ['modulo/add'], ['class' => 'btn btn-success']) ?></p>
