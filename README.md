@@ -19,3 +19,71 @@ Este é um painel de administração de módulos para projetos em Yii2.
 ```bash
 composer config repositories.yii2-modulo-admin vcs https://github.com/kairiroberto/yii2-modulo-admin
 composer require roberto/yii2-modulo-admin:dev-main
+```
+
+### Ativação no Yii2
+
+No arquivo `config/web.php`, registre o módulo:
+
+```php
+'modules' => [
+    'moduloadmin' => [
+        'class' => 'roberto\\moduloadmin\\Module',
+    ],
+],
+```
+
+Ou, fora do array diretamente:
+
+```php
+$config['modules']['moduloadmin'] = [
+    'class' => 'roberto\\moduloadmin\\Module',
+];
+```
+
+### Configuração Inicial
+
+```bash
+# Crie o arquivo de módulos se não existir
+nano config/modules.php
+```
+
+Conteúdo:
+```php
+<?php
+return [];
+```
+
+```bash
+# Garanta que a pasta de sessões existe e tem permissão
+mkdir -p runtime/sessions
+chmod -R 777 runtime/sessions
+```
+
+### Execução
+
+```bash
+php yii serve
+```
+
+Acesse no navegador:
+```
+http://localhost:8080/index.php?r=moduloadmin/modulo/index
+```
+
+### Uso
+
+1. Clique em "Adicionar Módulo"
+2. Informe:
+   - Nome do módulo (ex: `teste`)
+   - Classe do módulo (ex: `app\\modules\\teste\\Module`)
+3. Clique em "Ver Estrutura"
+4. O sistema criará:
+   - `modules/teste/`
+   - `Module.php`
+   - Subpastas padrão: `controllers/`, `models/`, `views/layouts/`
+
+---
+
+Se quiser gerar automaticamente um `Controller` ou uma `View` base, abra uma issue ou envie um PR. ♥️
+
