@@ -85,5 +85,12 @@ http://localhost:8080/index.php?r=moduloadmin/modulo/index
 
 ---
 
+### Telas
+
+![Painel do módulo](index.jpeg)
+![Painel do módulo](create.jpeg)
+![Painel do módulo](view.jpeg)
+
+
 Se quiser gerar automaticamente um `Controller` ou uma `View` base, abra uma issue ou envie um PR. ♥️
 
