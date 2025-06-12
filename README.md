@@ -85,6 +85,7 @@ http://localhost:8080/index.php?r=moduloadmin/modulo/index
    - `modules/teste/`
    - `Module.php`
    - Subpastas padrão: `controllers/`, `models/`, `views/layouts/`
+5. O sistema também permite selecionar uma  table do banco de dados e gerar automaticamente as classes MVC.
 
 ---
 
