@@ -24,6 +24,25 @@ composer require roberto/yii2-modulo-admin:dev-main
 ### Instalação via app\modules
 Baixa `controllers/ModuloController.php`, `views/modulo/add.php`, `views/modulo/index.php`, `views/modulo/view.php` e `Module.php`, corrigir os namespace das classes ModuloController e Module, finalmente, configurar o modulo no `config/web.php`.
 
+### Configuração Inicial
+
+```bash
+# Crie o arquivo de módulos se não existir
+nano config/modules.php
+```
+
+Conteúdo:
+```php
+<?php
+return [];
+```
+
+```bash
+# Garanta que a pasta de sessões existe e tem permissão
+mkdir -p runtime/sessions
+chmod -R 777 runtime/sessions
+```
+
 ### Ativação no Yii2
 
 No arquivo `config/web.php`, registre o módulo:
@@ -42,25 +61,6 @@ Ou, fora do array diretamente:
 $config['modules']['moduloadmin'] = [
     'class' => 'roberto\\moduloadmin\\Module',
 ];
-```
-
-### Configuração Inicial
-
-```bash
-# Crie o arquivo de módulos se não existir
-nano config/modules.php
-```
-
-Conteúdo:
-```php
-<?php
-return [];
-```
-
-```bash
-# Garanta que a pasta de sessões existe e tem permissão
-mkdir -p runtime/sessions
-chmod -R 777 runtime/sessions
 ```
 
 ### Execução
