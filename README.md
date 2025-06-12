@@ -48,8 +48,8 @@ chmod -R 777 runtime/sessions
 No arquivo `config/web.php`, registre o módulo e os array dos módulos que vão ser criados:
 
 ```bash
-$config['modules']['rmodules'] = [
-    'class' => 'app\\modules\\rmodules\\Module',
+$config['modules']['moduloadmin'] = [
+    'class' => 'app\\modules\\moduloadmin\\Module',
 ];
 
 $config['modules'] = array_merge(
