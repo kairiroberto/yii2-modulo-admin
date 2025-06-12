@@ -1,0 +1,13 @@
+{
+  "name": "roberto/yii2-modulo-admin",
+  "description": "Painel para gerenciar módulos do Yii2",
+  "type": "yii2-extension",
+  "autoload": {
+    "psr-4": {
+      "roberto\\moduloadmin\\": "src/"
+    }
+  },
+  "require": {
+    "yiisoft/yii2": "*"
+  }
+}
