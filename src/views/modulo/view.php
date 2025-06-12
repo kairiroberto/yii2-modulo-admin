@@ -1,3 +1,9 @@
+<?php
+use yii\data\ArrayDataProvider;
+use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\helpers\Url;
+?>
 <h1>📁 Estrutura do Módulo: <code><?= $id ?></code></h1>
 
 <ul>
@@ -32,9 +38,36 @@
     <?php endforeach; ?>
 </ul>
 
-<h3>⚙️ Trecho do config/web.php</h3>
-<pre style="background:#f0f0f0; padding:10px; border:1px solid #ccc; max-height:300px; overflow:auto;">
-    <?= htmlentities($configWeb) ?>
-</pre>
+<?= \yii\helpers\Html::a('⬅️ Voltar', ['index'], ['class' => 'btn btn-secondary']) ?>
 
-<p><a href="../index">⬅️ Voltar</a></p>
+<?php
+$dataProvider = new ArrayDataProvider([
+    'allModels' => array_map(fn($t) => ['nome' => $t], $tabelas),
+    'pagination' => false,
+]);
+?>
+
+<h1><?= Html::encode($this->title) ?></h1>
+
+<?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'columns' => [
+        [
+            'attribute' => 'nome',
+            'label' => 'Nome da Tabela',
+            'format' => 'raw',
+            'value' => fn($model) => Html::encode($model['nome']),
+        ],
+        [
+            'attribute' => 'nome',
+            'label' => 'Gerar CRUD',
+            'format' => 'raw',
+            'value' => function($model) use ($id) {
+                $tabela = $model['nome'];
+                $url = \yii\helpers\Url::to(['modulo/gerar-crud', 'tabela' => $tabela, 'modulo' => $id]);
+                return \yii\helpers\Html::a('⚙️ Gerar CRUD', $url, ['class' => 'btn btn-sm btn-primary']);
+            },
+        ],
+
+    ],
+]); ?>
