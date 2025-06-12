@@ -45,23 +45,16 @@ chmod -R 777 runtime/sessions
 
 ### Ativação no Yii2
 
-No arquivo `config/web.php`, registre o módulo:
+No arquivo `config/web.php`, registre o módulo e os array dos módulos que vão ser criados:
 
-```php
-'modules' => [
-    'moduloadmin' => [
-        'class' => 'roberto\\moduloadmin\\Module',
-    ],
-],
-```
-
-Ou, fora do array diretamente:
-
-```php
-$config['modules']['moduloadmin'] = [
-    'class' => 'roberto\\moduloadmin\\Module',
+```$config['modules']['rmodules'] = [
+    'class' => 'app\\modules\\rmodules\\Module',
 ];
-```
+
+$config['modules'] = array_merge(
+    $config['modules'],
+    require __DIR__ . '/modules.php'
+);```
 
 ### Execução
 
