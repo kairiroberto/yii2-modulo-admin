@@ -5,16 +5,14 @@ namespace roberto\moduloadmin\controllers;
 use Yii;
 use yii\web\Controller;
 
-class ModuloController extends Controller
-{
-    public function actionIndex()
-    {
+class ModuloController extends Controller {
+
+    public function actionIndex() {
         $modulos = require Yii::getAlias('@app/config/modules.php');
         return $this->render('index', ['modulos' => $modulos]);
     }
 
-    public function actionAdd()
-    {
+    public function actionAdd() {
         if (Yii::$app->request->isPost) {
             $nome = Yii::$app->request->post('nome');
             $classe = Yii::$app->request->post('classe');
@@ -33,27 +31,49 @@ class ModuloController extends Controller
         return $this->render('add');
     }
 
-    public function actionView($id)
-    {
+    public function actionView($id) {
         $basePath = Yii::getAlias("@app/modules/{$id}");
-        if (!is_dir($basePath)) {
-            throw new \yii\web\NotFoundHttpException("Módulo '{$id}' não encontrado.");
+
+        // Criar diretórios se não existirem
+        @mkdir("$basePath/controllers", 0777, true);
+        @mkdir("$basePath/models", 0777, true);
+        @mkdir("$basePath/views/layouts", 0777, true);
+
+        // Criar Module.php básico se não existir
+        $moduleFile = "$basePath/Module.php";
+        if (!file_exists($moduleFile)) {
+            $codigo = "<?php
+namespace app\\modules\\$id;
+
+use yii\\base\\Module;
+
+class Module extends Module
+{
+    public \$controllerNamespace = 'app\\\\modules\\\\$id\\\\controllers';
+
+    public function init()
+    {
+        parent::init();
+    }
+}
+";
+            file_put_contents($moduleFile, $codigo);
         }
 
         $estrutura = [
-            'Module.php' => is_file("{$basePath}/Module.php"),
-            'controllers' => is_dir("{$basePath}/controllers") ? scandir("{$basePath}/controllers") : [],
-            'models' => is_dir("{$basePath}/models") ? scandir("{$basePath}/models") : [],
-            'views' => is_dir("{$basePath}/views") ? scandir("{$basePath}/views") : [],
-            'views/layouts' => is_dir("{$basePath}/views/layouts") ? scandir("{$basePath}/views/layouts") : [],
+            'Module.php' => is_file("$basePath/Module.php"),
+            'controllers' => scandir("$basePath/controllers"),
+            'models' => scandir("$basePath/models"),
+            'views' => scandir("$basePath/views"),
+            'views/layouts' => scandir("$basePath/views/layouts"),
         ];
 
         $configWeb = file_exists(Yii::getAlias('@app/config/web.php')) ? file_get_contents(Yii::getAlias('@app/config/web.php')) : null;
 
         return $this->render('view', [
-            'id' => $id,
-            'estrutura' => $estrutura,
-            'configWeb' => $configWeb,
+                    'id' => $id,
+                    'estrutura' => $estrutura,
+                    'configWeb' => $configWeb,
         ]);
     }
 }

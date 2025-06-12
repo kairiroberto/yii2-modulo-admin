@@ -1,5 +1,6 @@
 <h1>➕ Novo Módulo</h1>
 <form method="post">
+    <?= \yii\helpers\Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
     <label>Nome do Módulo:</label><br>
     <input type="text" name="nome" required><br><br>
     <label>Classe do Módulo (ex: <code>app\\modules\\teste\\Module</code>):</label><br>
