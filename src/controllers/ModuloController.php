@@ -30,7 +30,7 @@ class ModuloController extends Controller {
                 file_put_contents($arquivo, "<?php\nreturn " . var_export($modulos, true) . ";\n");
             }
     
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $nome]);
         }
     
         return $this->render('add', ['model' => $model]);
@@ -53,11 +53,11 @@ class ModuloController extends Controller {
             $codigo = "<?php
 namespace app\\modules\\$id;
 
-use yii\\base\\Module;
+use Yii;
 
-class Module extends Module
+class Module extends \\yii\\base\\Module
 {
-    public \$controllerNamespace = 'app\\\\modules\\\\$id\\\\controllers';
+    public \$controllerNamespace = 'app\\modules\\$id\\controllers';
 
     public function init()
     {
