@@ -33,6 +33,9 @@ class ModuloController extends Controller {
 
     public function actionView($id) {
         $basePath = Yii::getAlias("@app/modules/{$id}");
+        
+        // Cria a pasta do módulo se não existir
+        @mkdir($basePath, 0777, true);
 
         // Criar diretórios se não existirem
         @mkdir("$basePath/controllers", 0777, true);
