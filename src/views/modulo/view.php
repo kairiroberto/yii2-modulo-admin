@@ -45,7 +45,8 @@ use yii\helpers\Url;
             <?= $file ?>
             <?php
                 if (str_ends_with($file, 'Controller.php')) {
-                    $controllerId = strtolower(str_replace('Controller.php', '', $file));
+                    $controllerId = str_replace('Controller.php', '', $file);
+                    $controllerId = strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $controllerId));
                     $url = Url::to(["/$id/$controllerId/index"]);
                     echo " - " . Html::a('🔗 Acessar', $url, ['target' => '_blank']);
                 }
