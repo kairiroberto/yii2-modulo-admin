@@ -38,6 +38,22 @@ use yii\helpers\Url;
     <?php endforeach; ?>
 </ul>
 
+<h3>📂 Links</h3>
+<ul>
+    <?php foreach ($estrutura['controllers'] as $file): if ($file === '.' || $file === '..') continue; ?>
+        <li>
+            <?= $file ?>
+            <?php
+                if (str_ends_with($file, 'Controller.php')) {
+                    $controllerId = strtolower(str_replace('Controller.php', '', $file));
+                    $url = Url::to(["/$id/$controllerId/index"]);
+                    echo " - " . Html::a('🔗 Acessar', $url, ['target' => '_blank']);
+                }
+            ?>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
 <?= \yii\helpers\Html::a('⬅️ Voltar', ['index'], ['class' => 'btn btn-secondary']) ?>
 
 <?php
