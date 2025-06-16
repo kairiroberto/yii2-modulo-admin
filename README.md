@@ -14,6 +14,11 @@ Este é um painel de administração de módulos para projetos em Yii2.
   - Layouts
 - ⚙️ Exibe o conteúdo do `config/web.php`
 
+### Instalação via Composer
+
+```bash
+composer require kairiroberto/yii2-modulo-admin
+```
 ### Instalação via Composer (repositório Git)
 
 ```bash
