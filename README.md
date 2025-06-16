@@ -23,7 +23,7 @@ composer require kairiroberto/yii2-modulo-admin
 
 ```bash
 composer config repositories.yii2-modulo-admin vcs https://github.com/kairiroberto/yii2-modulo-admin
-composer require roberto/yii2-modulo-admin:dev-main
+composer require kairiroberto/yii2-modulo-admin:dev-main
 ```
 
 ### Instalação via app\modules
