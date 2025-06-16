@@ -37,6 +37,7 @@ class ModuloController extends Controller {
     }
 
     public function actionView($id) {
+        Yii::$app->cache->flush();
         $basePath = Yii::getAlias("@app/modules/{$id}");
         
         // Cria a pasta do módulo se não existir
@@ -429,12 +430,20 @@ class DefaultController extends Controller
     }
     
     private function criarLayoutMain($basePath, $id) {
-        $layoutOrigem = dirname(__DIR__) . '/views/layouts/main1.php';
+        $layoutOrigem = dirname(__DIR__) . '/views/layouts/main.php';
+        $itemsOrigem = dirname(__DIR__) . '/views/layouts/items.php';
+
         $layoutDestino = "$basePath/views/layouts/main.php";
+        $itemsDestino = "$basePath/views/layouts/items.php";
     
         if (file_exists($layoutOrigem) && !file_exists($layoutDestino)) {
             copy($layoutOrigem, $layoutDestino);
         }
+        
+        if (file_exists($itemsOrigem) && !file_exists($itemsDestino)) {
+            copy($itemsOrigem, $itemsDestino);
+        }
     }
+
     
 }
