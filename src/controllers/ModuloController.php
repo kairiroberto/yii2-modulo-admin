@@ -429,7 +429,7 @@ class DefaultController extends Controller
     }
     
     private function criarLayoutMain($basePath, $id) {
-        $layoutOrigem = Yii::getAlias('@app/modules/moduloadmin/views/layouts/main1.php');
+        $layoutOrigem = dirname(__DIR__) . '/views/layouts/main1.php';
         $layoutDestino = "$basePath/views/layouts/main.php";
     
         if (file_exists($layoutOrigem) && !file_exists($layoutDestino)) {
