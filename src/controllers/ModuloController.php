@@ -1,6 +1,6 @@
 <?php
 
-namespace roberto\moduloadmin\controllers;
+namespace kairiroberto\moduloadmin\controllers;
 
 use Yii;
 use yii\web\Controller;
